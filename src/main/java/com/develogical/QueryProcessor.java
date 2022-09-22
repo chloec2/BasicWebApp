@@ -17,17 +17,29 @@ public class QueryProcessor {
         if (query.toLowerCase().contains("what is 9 plus 12")) {
             return "21";
         }
-        if (query.toLowerCase().contains("which of the following numbers is the largest: 208, 59, 147, 27")) {
-            return "208";
-        }
-        if (query.toLowerCase().contains("which of the following numbers is the largest: 753, 82, 65, 644")) {
-            return "644";
-        }
-        if (query.toLowerCase().contains("which of the following numbers is the largest: 15, 5")) {
-            return "15";
+        if (query.toLowerCase().contains("which of the following numbers is the largest:")) {
+            String[] parts = query.toLowerCase().split(" ");
+            String currmax = "";
+            for (int i = 0; i < parts.length; i++) {
+                System.out.println(parts[i]);
+                try {
+                    int curr;
+                    if (parts[i].substring(parts[i].length() - 1) == ",") {
+                        curr = Integer.parseInt(parts[i].substring(0, parts[i].length() - 1));
+                    } else {
+                        curr = Integer.parseInt(parts[i]);
+                    }
+                    if ((currmax == "") | (curr > Integer.parseInt(currmax))) {
+                        currmax = parts[i];
+                        System.out.println(currmax);
+                    }
+                } catch (NumberFormatException nfe) {
+                    System.out.println("Something went wrong.");
+                }
+            }
+            
         }
 
-        
         
         
         return "";
